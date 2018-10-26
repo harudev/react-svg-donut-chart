@@ -4,13 +4,13 @@ import PropTypes from "prop-types"
 import Segment from "./Segment"
 import {width} from "./constants"
 
-const ReactSvgDonutChart = ({data, spacing}) => {
+const ReactSvgDonutChart = ({data, fontColor, spacing}) => {
   const total = data.reduce((prev, current) => current.value + prev, 0)
   let percentAcc = 0
   return (
     <svg viewBox={`0 0 ${width} ${width}`}>
       {data.map((d, i) => {
-        const percent = d.value / Math.ceil(total) * 100
+        const percent = (d.value / Math.ceil(total)) * 100
         const DashArrayPercent =
           spacing < 0 || percent - spacing < 0 ? percent : percent - spacing
         const DashArraylength =
@@ -24,8 +24,10 @@ const ReactSvgDonutChart = ({data, spacing}) => {
           percent > 0 && (
             <Segment
               key={i}
+              fontColor={fontColor}
               strokeDasharray={strokeDasharray}
               strokeDashoffset={strokeDashoffset}
+              percent={String(percent.toFixed(2))}
               {...d}
             />
           )
@@ -41,9 +43,11 @@ ReactSvgDonutChart.propTypes = {
       stroke: PropTypes.string.isRequired,
       strokeWidth: PropTypes.number,
       title: PropTypes.string,
+      fontSize: PropTypes.number,
       value: PropTypes.number.isRequired,
     })
   ),
+  fontColor: PropTypes.string,
   spacing: PropTypes.number,
 }
 
