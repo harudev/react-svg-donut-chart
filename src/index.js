@@ -27,7 +27,7 @@ const ReactSvgDonutChart = ({data, fontColor, spacing}) => {
               fontColor={fontColor}
               strokeDasharray={strokeDasharray}
               strokeDashoffset={strokeDashoffset}
-              percent={String(percent.toFixed(2))}
+              percent={percent.toFixed(2)}
               {...d}
             />
           )
